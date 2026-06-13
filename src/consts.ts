@@ -1,2 +1,2 @@
-export const SITE_TITLE = 'Field Journal: Place';
-export const SITE_DESCRIPTION = 'landscapes, people, change';
+export const SITE_TITLE = 'People Spaces of the PNW';
+export const SITE_DESCRIPTION = 'field notes on public spaces';
