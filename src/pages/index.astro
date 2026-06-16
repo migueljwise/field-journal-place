@@ -2,12 +2,14 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+import img1 from '../assets/home-01.jpg';
+import img2 from '../assets/home-02.jpg';
+import img3 from '../assets/home-03.jpg';
+import img4 from '../assets/home-04.jpg';
+import img5 from '../assets/home-05.jpg';
 ---
 
 <!doctype html>
@@ -19,21 +21,37 @@ const posts = (await getCollection('blog')).sort(
     <Header />
     <main>
       <section class="intro">
-        <h1>People Spaces of the PNW</h1>
-       <p>Field notes on public spaces</p>
+        <h1>Miguel Wise</h1>
+        <p>I like places & landscapes, books & stories</p>
       </section>
-      <section class="posts">
-        {posts.map((post) => (
-          <a href={`/blog/${post.id}`} class="post-card">
-            <div class="post-meta">
-              <span class="post-type">{post.data.type}</span>
-              <span class="post-city">{post.data.city}</span>
-            </div>
-            <h2>{post.data.title}</h2>
-            <p>{post.data.description}</p>
-            <span class="post-lens">{post.data.lens}</span>
-          </a>
-        ))}
+
+      <div class="image-grid">
+        <div class="cell cell-1">
+          <Image src={img1} alt="" />
+        </div>
+        <div class="cell cell-2">
+          <Image src={img2} alt="" />
+        </div>
+        <div class="cell cell-3">
+          <Image src={img3} alt="" />
+        </div>
+        <div class="cell cell-4">
+          <Image src={img4} alt="" />
+        </div>
+        <div class="cell cell-5">
+          <Image src={img5} alt="" />
+        </div>
+      </div>
+
+      <section class="projects">
+        <a href="/peoplespacespnw/" class="project-card">
+          <h2>People Spaces of the PNW</h2>
+          <p>Field notes on public spaces in the Pacific Northwest.</p>
+        </a>
+        <a href="/writing/" class="project-card">
+          <h2>Writing</h2>
+          <p>Articles and essays.</p>
+        </a>
       </section>
     </main>
     <Footer />
@@ -46,8 +64,9 @@ const posts = (await getCollection('blog')).sort(
     margin: 0 auto;
     padding: 2rem 1.5rem;
   }
+
   .intro {
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
     border-bottom: 1px solid #e0e0e0;
     padding-bottom: 2rem;
   }
@@ -56,64 +75,78 @@ const posts = (await getCollection('blog')).sort(
     font-weight: 300;
     margin-bottom: 1rem;
   }
-  .intro h1 em {
-    font-style: italic;
-  }
   .intro p {
     font-size: 1.1rem;
     color: #555;
     line-height: 1.7;
   }
-  .posts {
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 220px 220px 220px;
+    gap: 3px;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .cell-1 { grid-column: 1 / 3; grid-row: 1; }
+  .cell-2 { grid-column: 3;     grid-row: 1; }
+  .cell-3 { grid-column: 1;     grid-row: 2; }
+  .cell-4 { grid-column: 2 / 4; grid-row: 2; }
+  .cell-5 { grid-column: 1 / 4; grid-row: 3; }
+
+  .cell {
+    overflow: hidden;
+  }
+  .cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 600px) {
+    .image-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 160px 160px 160px;
+      margin-left: -1rem;
+      margin-right: -1rem;
+    }
+    .cell-1,
+    .cell-2,
+    .cell-3,
+    .cell-4,
+    .cell-5 {
+      grid-column: auto;
+      grid-row: auto;
+    }
+  }
+
+  .projects {
     display: flex;
     flex-direction: column;
     gap: 2rem;
   }
-  .post-card {
+  .project-card {
     text-decoration: none;
     color: inherit;
     border-bottom: 1px solid #e0e0e0;
     padding-bottom: 2rem;
   }
-  .post-card:hover h2 {
+  .project-card:hover h2 {
     color: #c0392b;
   }
-  .post-meta {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  .post-type {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #c0392b;
-  }
-  .post-city {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #888;
-  }
-  .post-card h2 {
+  .project-card h2 {
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 0.5rem;
     transition: color 0.15s;
   }
-  .post-card p {
+  .project-card p {
     font-size: 0.95rem;
     color: #555;
     line-height: 1.6;
-    margin-bottom: 0.75rem;
-  }
-  .post-lens {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #888;
-    border: 1px solid #ddd;
-    padding: 2px 10px;
-    border-radius: 99px;
   }
 </style>

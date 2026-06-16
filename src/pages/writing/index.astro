@@ -1,0 +1,83 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('writing')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title="Writing — Miguel Wise" description="Articles and essays by Miguel Wise" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="intro">
+        <h1>Writing</h1>
+      </section>
+      <section class="articles">
+        {articles.length === 0 && (
+          <p class="empty">No articles yet.</p>
+        )}
+        {articles.map((article) => (
+          <a href={`/writing/${article.id}`} class="article-card">
+            <h2>{article.data.title}</h2>
+            <p>{article.data.description}</p>
+          </a>
+        ))}
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+  .intro {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 2rem;
+  }
+  .intro h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+  }
+  .articles {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .empty {
+    color: #888;
+    font-size: 0.95rem;
+  }
+  .article-card {
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 2rem;
+  }
+  .article-card:hover h2 {
+    color: #c0392b;
+  }
+  .article-card h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    transition: color 0.15s;
+  }
+  .article-card p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+  }
+</style>

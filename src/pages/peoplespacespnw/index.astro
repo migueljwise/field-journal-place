@@ -1,11 +1,11 @@
 ---
 import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
+import PeopleSpacesHeader from '../../components/PeopleSpacesHeader.astro';
 import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { PEOPLE_SPACES_TITLE, PEOPLE_SPACES_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog')).sort(
+const posts = (await getCollection('spaces')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
@@ -13,14 +13,18 @@ const posts = (await getCollection('blog')).sort(
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title={PEOPLE_SPACES_TITLE} description={PEOPLE_SPACES_DESCRIPTION} />
   </head>
   <body>
-    <Header />
+    <PeopleSpacesHeader />
     <main>
+      <section class="intro">
+        <h1>People Spaces of the PNW</h1>
+        <p>Field notes on public spaces</p>
+      </section>
       <section class="posts">
         {posts.map((post) => (
-          <a href={`/blog/${post.id}`} class="post-card">
+          <a href={`/peoplespacespnw/${post.id}`} class="post-card">
             <div class="post-meta">
               <span class="post-type">{post.data.type}</span>
               <span class="post-city">{post.data.city}</span>
@@ -41,6 +45,21 @@ const posts = (await getCollection('blog')).sort(
     max-width: 720px;
     margin: 0 auto;
     padding: 2rem 1.5rem;
+  }
+  .intro {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 2rem;
+  }
+  .intro h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+  .intro p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.7;
   }
   .posts {
     display: flex;
@@ -77,6 +96,7 @@ const posts = (await getCollection('blog')).sort(
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 0.5rem;
+    transition: color 0.15s;
   }
   .post-card p {
     font-size: 0.95rem;
