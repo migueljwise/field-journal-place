@@ -2,20 +2,22 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+import riverOtter from '../assets/river-otter.jpg';
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title="About" description="About People Spaces of the PNW" />
+    <BaseHead title="About — Miguel Wise" description="About Miguel Wise" />
   </head>
   <body>
     <Header />
     <main>
       <h1>About</h1>
-     <div class="content">
-        <p>These are field notes from the communities of the Pacific Northwest. I'm investigating public spaces: how they came to be and the various ways communities interact with them.</p>
-        <p>Have a space you want me to investigate? <a href="mailto:migueljwise@gmail.com">Write to me!</a></p>
+      <div class="content">
+        <p>This is a collection of my thoughts and projects. <a href="mailto:migueljwise@gmail.com">Reach out!</a></p>
+        <Image src={riverOtter} alt="A river otter wearing binoculars" class="about-photo" />
       </div>
     </main>
     <Footer />
@@ -34,6 +36,10 @@ import Footer from '../components/Footer.astro';
     margin-bottom: 2rem;
     border-bottom: 0.5px solid #e0e0e0;
     padding-bottom: 1rem;
+    text-align: center;
+  }
+  .content {
+    text-align: center;
   }
   .content p {
     font-size: 1rem;
@@ -41,5 +47,14 @@ import Footer from '../components/Footer.astro';
     color: #333;
     margin-bottom: 1rem;
     font-weight: 300;
+  }
+  .content .about-photo {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    display: block;
+    margin-top: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>
