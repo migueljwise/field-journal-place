@@ -1,0 +1,50 @@
+---
+import { PEOPLE_SPACES_TITLE } from '../consts';
+---
+
+<header>
+  <nav>
+    <a href="/peoplespacespnw/" class="site-title">{PEOPLE_SPACES_TITLE}</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/peoplespacespnw/">Journal</a>
+      <a href="/peoplespacespnw/about">About This Project</a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  header {
+    padding: 1.25rem 2rem;
+    border-bottom: 0.5px solid #e0e0e0;
+    background: white;
+  }
+  nav {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .site-title {
+    font-size: 1rem;
+    font-weight: 300;
+    text-decoration: none;
+    color: inherit;
+    letter-spacing: 0.02em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .nav-links a {
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: #555;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .nav-links a:hover {
+    color: #c0392b;
+  }
+</style>
