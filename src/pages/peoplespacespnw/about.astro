@@ -1,0 +1,45 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import PeopleSpacesHeader from '../../components/PeopleSpacesHeader.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title="About This Project — People Spaces of the PNW" description="About People Spaces of the PNW" />
+  </head>
+  <body>
+    <PeopleSpacesHeader />
+    <main>
+      <h1>About This Project</h1>
+      <div class="content">
+        <p>These are field notes from the Pacific Northwest. I'm investigating public spaces: how they came to be and the various ways people interact with them.</p>
+        <p>Have a space you want me to investigate? <a href="mailto:migueljwise@gmail.com">Write to me!</a></p>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+  h1 {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    border-bottom: 0.5px solid #e0e0e0;
+    padding-bottom: 1rem;
+  }
+  .content p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+</style>
